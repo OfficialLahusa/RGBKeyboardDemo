@@ -1,0 +1,209 @@
+﻿using RGB.NET.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RBGKeyboardDemo
+{
+    public static class KeyConverter
+    {
+        public static LedId GetLedByConsoleKey(ConsoleKey consoleKey)
+        {
+            switch(consoleKey)
+            {
+                default:
+                    return LedId.Invalid;
+                case ConsoleKey.Backspace:
+                    return LedId.Keyboard_Backspace;
+                case ConsoleKey.Tab:
+                    return LedId.Keyboard_Tab;
+                case ConsoleKey.Enter:
+                    return LedId.Keyboard_Enter;
+                case ConsoleKey.Pause:
+                    return LedId.Keyboard_PauseBreak;
+                case ConsoleKey.Escape:
+                    return LedId.Keyboard_Escape;
+                case ConsoleKey.Spacebar:
+                    return LedId.Keyboard_Space;
+                case ConsoleKey.PageUp:
+                    return LedId.Keyboard_PageUp;
+                case ConsoleKey.PageDown:
+                    return LedId.Keyboard_PageDown;
+                case ConsoleKey.End:
+                    return LedId.Keyboard_End;
+                case ConsoleKey.Home:
+                    return LedId.Keyboard_Home;
+                case ConsoleKey.LeftArrow:
+                    return LedId.Keyboard_ArrowLeft;
+                case ConsoleKey.UpArrow:
+                    return LedId.Keyboard_ArrowUp;
+                case ConsoleKey.RightArrow:
+                    return LedId.Keyboard_ArrowRight;
+                case ConsoleKey.DownArrow:
+                    return LedId.Keyboard_ArrowDown;
+                case ConsoleKey.PrintScreen:
+                    return LedId.Keyboard_PrintScreen;
+                case ConsoleKey.Insert:
+                    return LedId.Keyboard_Insert;
+                case ConsoleKey.Delete:
+                    return LedId.Keyboard_Delete;
+                case ConsoleKey.D0:
+                    return LedId.Keyboard_0;
+                case ConsoleKey.D1:
+                    return LedId.Keyboard_1;
+                case ConsoleKey.D2:
+                    return LedId.Keyboard_2;
+                case ConsoleKey.D3:
+                    return LedId.Keyboard_3;
+                case ConsoleKey.D4:
+                    return LedId.Keyboard_4;
+                case ConsoleKey.D5:
+                    return LedId.Keyboard_5;
+                case ConsoleKey.D6:
+                    return LedId.Keyboard_6;
+                case ConsoleKey.D7:
+                    return LedId.Keyboard_7;
+                case ConsoleKey.D8:
+                    return LedId.Keyboard_8;
+                case ConsoleKey.D9:
+                    return LedId.Keyboard_9;
+                case ConsoleKey.A:
+                    return LedId.Keyboard_A;
+                case ConsoleKey.B:
+                    return LedId.Keyboard_B;
+                case ConsoleKey.C:
+                    return LedId.Keyboard_C;
+                case ConsoleKey.D:
+                    return LedId.Keyboard_D;
+                case ConsoleKey.E:
+                    return LedId.Keyboard_E;
+                case ConsoleKey.F:
+                    return LedId.Keyboard_F;
+                case ConsoleKey.G:
+                    return LedId.Keyboard_G;
+                case ConsoleKey.H:
+                    return LedId.Keyboard_H;
+                case ConsoleKey.I:
+                    return LedId.Keyboard_I;
+                case ConsoleKey.J:
+                    return LedId.Keyboard_J;
+                case ConsoleKey.K:
+                    return LedId.Keyboard_K;
+                case ConsoleKey.L:
+                    return LedId.Keyboard_L;
+                case ConsoleKey.M:
+                    return LedId.Keyboard_M;
+                case ConsoleKey.N:
+                    return LedId.Keyboard_N;
+                case ConsoleKey.O:
+                    return LedId.Keyboard_O;
+                case ConsoleKey.P:
+                    return LedId.Keyboard_P;
+                case ConsoleKey.Q:
+                    return LedId.Keyboard_Q;
+                case ConsoleKey.R:
+                    return LedId.Keyboard_R;
+                case ConsoleKey.S:
+                    return LedId.Keyboard_S;
+                case ConsoleKey.T:
+                    return LedId.Keyboard_T;
+                case ConsoleKey.U:
+                    return LedId.Keyboard_U;
+                case ConsoleKey.V:
+                    return LedId.Keyboard_V;
+                case ConsoleKey.W:
+                    return LedId.Keyboard_W;
+                case ConsoleKey.X:
+                    return LedId.Keyboard_X;
+                case ConsoleKey.Y:
+                    return LedId.Keyboard_Y;
+                case ConsoleKey.Z:
+                    return LedId.Keyboard_Z;
+                case ConsoleKey.LeftWindows:
+                    return LedId.Keyboard_LeftGui;
+                case ConsoleKey.RightWindows:
+                    return LedId.Keyboard_RightGui;
+                case ConsoleKey.Applications:
+                    return LedId.Keyboard_Application;
+                case ConsoleKey.NumPad0:
+                    return LedId.Keyboard_Num0;
+                case ConsoleKey.NumPad1:
+                    return LedId.Keyboard_Num1;
+                case ConsoleKey.NumPad2:
+                    return LedId.Keyboard_Num2;
+                case ConsoleKey.NumPad3:
+                    return LedId.Keyboard_Num3;
+                case ConsoleKey.NumPad4:
+                    return LedId.Keyboard_Num4;
+                case ConsoleKey.NumPad5:
+                    return LedId.Keyboard_Num5;
+                case ConsoleKey.NumPad6:
+                    return LedId.Keyboard_Num6;
+                case ConsoleKey.NumPad7:
+                    return LedId.Keyboard_Num7;
+                case ConsoleKey.NumPad8:
+                    return LedId.Keyboard_Num8;
+                case ConsoleKey.NumPad9:
+                    return LedId.Keyboard_Num9;
+                case ConsoleKey.Multiply:
+                    return LedId.Keyboard_NumAsterisk;
+                case ConsoleKey.Add:
+                    return LedId.Keyboard_NumPlus;
+                case ConsoleKey.Subtract:
+                    return LedId.Keyboard_NumMinus;
+                case ConsoleKey.Decimal:
+                    return LedId.Keyboard_NumPeriodAndDelete;
+                case ConsoleKey.Divide:
+                    return LedId.Keyboard_NumSlash;
+                case ConsoleKey.F1:
+                    return LedId.Keyboard_F1;
+                case ConsoleKey.F2:
+                    return LedId.Keyboard_F2;
+                case ConsoleKey.F3:
+                    return LedId.Keyboard_F3;
+                case ConsoleKey.F4:
+                    return LedId.Keyboard_F4;
+                case ConsoleKey.F5:
+                    return LedId.Keyboard_F5;
+                case ConsoleKey.F6:
+                    return LedId.Keyboard_F6;
+                case ConsoleKey.F7:
+                    return LedId.Keyboard_F7;
+                case ConsoleKey.F8:
+                    return LedId.Keyboard_F8;
+                case ConsoleKey.F9:
+                    return LedId.Keyboard_F9;
+                case ConsoleKey.F10:
+                    return LedId.Keyboard_F10;
+                case ConsoleKey.F11:
+                    return LedId.Keyboard_F11;
+                case ConsoleKey.F12:
+                    return LedId.Keyboard_F12;
+                case ConsoleKey.VolumeMute:
+                    return LedId.Keyboard_MediaMute;
+                case ConsoleKey.VolumeDown:
+                    return LedId.Keyboard_MediaVolumeDown;
+                case ConsoleKey.VolumeUp:
+                    return LedId.Keyboard_MediaVolumeUp;
+                case ConsoleKey.MediaNext:
+                    return LedId.Keyboard_MediaNextTrack;
+                case ConsoleKey.MediaPrevious:
+                    return LedId.Keyboard_MediaPreviousTrack;
+                case ConsoleKey.MediaStop:
+                    return LedId.Keyboard_MediaStop;
+                case ConsoleKey.MediaPlay:
+                    return LedId.Keyboard_MediaPlay;
+                case ConsoleKey.OemPlus:
+                    return LedId.Keyboard_EqualsAndPlus;
+                case ConsoleKey.OemComma:
+                    return LedId.Keyboard_CommaAndLessThan;
+                case ConsoleKey.OemMinus:
+                    return LedId.Keyboard_MinusAndUnderscore;
+                case ConsoleKey.OemPeriod:
+                    return LedId.Keyboard_PeriodAndBiggerThan;
+            }
+        }
+    }
+}

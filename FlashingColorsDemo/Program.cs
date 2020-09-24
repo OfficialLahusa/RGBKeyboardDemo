@@ -10,6 +10,7 @@ using RGB.NET.Brushes.Gradients;
 using RGB.NET.Core;
 using RGB.NET.Groups;
 using System.Threading;
+using RBGKeyboardDemo;
 
 namespace RBGKeyboardDemo
 {
@@ -20,6 +21,7 @@ namespace RBGKeyboardDemo
         static void Main(string[] args)
         {
             RGBSurface surface = RGBSurface.Instance;
+            Random random = new Random();
             surface.Exception += eventArgs => Console.WriteLine(eventArgs.Exception.Message);
 
             TimerUpdateTrigger updateTrigger = new TimerUpdateTrigger();
@@ -62,12 +64,10 @@ namespace RBGKeyboardDemo
                 Console.ReadKey();
 
                 return;
-            }
-            else if (surface.Devices.Count() == 1)
+            } else if(surface.Devices.Count() == 1)
             {
                 choice = 0;
-            }
-            else
+            } else
             {
                 //Let the user choose which device the effect should be applied to by it's index in the enumeration
                 Console.Write("Pick a device [Enter Number]:\n>");
@@ -90,6 +90,7 @@ namespace RBGKeyboardDemo
                     }
                 } while (isOutOfRange);
             }
+            
 
             //Determine device-specific led position minima and maxima (Rectangle Bounds)
             double minx = double.PositiveInfinity, miny = double.PositiveInfinity, maxx = double.NegativeInfinity, maxy = double.NegativeInfinity;
@@ -108,7 +109,7 @@ namespace RBGKeyboardDemo
             //Set background
             ListLedGroup groupBackground = new ListLedGroup(surface.Devices.ElementAt(choice));
             groupBackground.ZIndex = 0;
-            groupBackground.Brush = new SolidColorBrush(new Color(100, 100, 100));
+            groupBackground.Brush = new SolidColorBrush(new Color(0, 0, 0));
 
             Dictionary<LedId, ListLedGroup> ledGroups = new Dictionary<LedId, ListLedGroup>();
 
@@ -118,44 +119,46 @@ namespace RBGKeyboardDemo
                 {
                     ListLedGroup group = new ListLedGroup(led);
                     group.ZIndex = 1;
-                    group.Brush = new SolidColorBrush(new Color(0.0, 1.0, 0.0));
+                    group.Brush = new SolidColorBrush(new Color(0.0, 0.0, 0.0));
                     group.Brush.IsEnabled = false;
 
                     ledGroups.Add(led.Id, group);
                 }
             }
 
-            double xoff = 0.0;
-            bool play;
-            do
+            ConsoleKeyInfo key = Console.ReadKey();
+            Console.Write("\r");
+            while (key.Key != ConsoleKey.Escape)
             {
+                LedId pressedKeyLedId = KeyConverter.GetLedByConsoleKey(key.Key);
+
                 foreach (Led led in surface.Devices.ElementAt(choice))
                 {
-                    //Map positions of Leds to Range
-                    double x = (led.ActualLocation.X + led.ActualSize.Width / 2.0).Map(minx, maxx, 0.0, 4*Math.PI);
-                    double y = (led.ActualLocation.Y + led.ActualSize.Height / 2.0).Map(miny, maxy, 2, -2);
+                    ledGroups[led.Id].Brush.IsEnabled = false;
+                }
 
-                    //Activate/Deactivate Brushes according to calculation
-                    if(Math.Sin(x + xoff) >= y)
+                if (pressedKeyLedId != LedId.Invalid)
+                {
+                    double hue = random.NextDouble() * 360;
+                    foreach (Led led in surface.Devices.ElementAt(choice))
                     {
+                        const double distScaleFac = 2.0;
+                        double deltaX = led.ActualLocation.X - led.ActualSize.Width / 2 - surface.Devices.ElementAt(choice)[pressedKeyLedId].ActualLocation.X - surface.Devices.ElementAt(choice)[pressedKeyLedId].ActualSize.Width / 2;
+                        double deltaY = led.ActualLocation.Y - led.ActualSize.Height / 2 - surface.Devices.ElementAt(choice)[pressedKeyLedId].ActualLocation.Y - surface.Devices.ElementAt(choice)[pressedKeyLedId].ActualSize.Height / 2;
+                        double dist = distScaleFac * Math.Sqrt(deltaX*deltaX+deltaY*deltaY);
+
+                        Color color = new Color();
+                        color = color.SetHSV(hue, 1.0, 1.0);
+                        color = color.SetA(Math.Max(255.0 - dist, 0)/255.0);
+
+                        ledGroups[led.Id].Brush = new SolidColorBrush(color);
                         ledGroups[led.Id].Brush.IsEnabled = true;
-                    } else
-                    {
-                        ledGroups[led.Id].Brush.IsEnabled = false;
                     }
                 }
 
-                if(!anim_autoplay)
-                {
-                    play = Console.ReadKey().Key != ConsoleKey.Escape;
-                } else
-                {
-                    Thread.Sleep(1000/12);
-                }
-
-                xoff += 0.1;
-
-            } while (anim_autoplay || play);
+                key = Console.ReadKey();
+                Console.Write("\r");
+            }
 
 
             Console.ReadKey();
